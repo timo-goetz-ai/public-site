@@ -1,0 +1,82 @@
+---
+interface Props {
+  text: string;
+  href?: string;
+  variant?: 'primary' | 'ghost';
+  class?: string;
+}
+
+const { text, href, variant = 'primary', class: className = '' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  class={`magnetic-btn magnetic-btn--${variant} ${className}`}
+>
+  <span class="btn-text">{text}</span>
+</Tag>
+
+<style>
+  .magnetic-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    will-change: transform;
+    transition: transform 200ms ease-out, box-shadow 200ms;
+    border: none;
+  }
+
+  .magnetic-btn--primary {
+    background: linear-gradient(135deg, #3b82f6, #a855f7);
+    color: white;
+    box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+  }
+
+  .magnetic-btn--primary:hover {
+    box-shadow: 0 6px 30px rgba(59,130,246,0.5), 0 0 0 1px rgba(168,85,247,0.3);
+  }
+
+  .magnetic-btn--ghost {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+  }
+
+  .magnetic-btn--ghost:hover {
+    border-color: rgba(255,255,255,0.5);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  }
+
+  .btn-text {
+    position: relative;
+    z-index: 1;
+    transition: transform 200ms;
+  }
+
+  .magnetic-btn:hover .btn-text { transform: scale(1.04); }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.magnetic-btn').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = ((e.clientX - rect.left - rect.width / 2) * 0.2).toFixed(2);
+      const y = ((e.clientY - rect.top - rect.height / 2) * 0.2).toFixed(2);
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
+    });
+  });
+</script>

@@ -1,0 +1,47 @@
+---
+interface Props {
+  variant?: 'light' | 'dark';
+  class?: string;
+}
+
+const { variant = 'dark', class: className = '' } = Astro.props;
+---
+
+<div class={`animated-bg animated-bg--${variant} ${className}`} aria-hidden="true">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+</div>
+
+<style>
+  .animated-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    animation: float-shape 20s infinite ease-in-out;
+  }
+
+  /* Dark shapes */
+  .animated-bg--dark .shape-1 { width: 320px; height: 320px; background: #1d4ed8; opacity: 0.2; top: -80px; left: -80px; }
+  .animated-bg--dark .shape-2 { width: 240px; height: 240px; background: #7c3aed; opacity: 0.15; top: 40%; right: -60px; animation-delay: -7s; }
+  .animated-bg--dark .shape-3 { width: 280px; height: 280px; background: #0891b2; opacity: 0.12; bottom: -60px; left: 35%; animation-delay: -14s; }
+
+  /* Light shapes */
+  .animated-bg--light .shape-1 { width: 320px; height: 320px; background: #bfdbfe; opacity: 0.6; top: -80px; left: -80px; }
+  .animated-bg--light .shape-2 { width: 240px; height: 240px; background: #ddd6fe; opacity: 0.5; top: 40%; right: -60px; animation-delay: -7s; }
+  .animated-bg--light .shape-3 { width: 280px; height: 280px; background: #a5f3fc; opacity: 0.4; bottom: -60px; left: 35%; animation-delay: -14s; }
+
+  @keyframes float-shape {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    25%       { transform: translateY(-25px) translateX(12px); }
+    50%       { transform: translateY(-45px) translateX(0px); }
+    75%       { transform: translateY(-20px) translateX(-12px); }
+  }
+</style>

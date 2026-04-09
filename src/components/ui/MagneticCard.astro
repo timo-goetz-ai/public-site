@@ -1,0 +1,121 @@
+---
+interface Props {
+  title?: string;
+  value?: string;
+  icon?: string;
+  trend?: 'up' | 'down';
+  variant?: 'light' | 'dark';
+  class?: string;
+}
+
+const { title, value, icon, trend, variant = 'dark', class: className = '' } = Astro.props;
+---
+
+<div class={`magnetic-card magnetic-card--${variant} ${className}`}>
+  {variant === 'dark' && <div class="card-glow" aria-hidden="true"></div>}
+  <div class="card-content">
+    {icon && <div class="card-icon">{icon}</div>}
+    <slot />
+    {title && <h3 class="card-title">{title}</h3>}
+    {value && <p class="card-value">{value}</p>}
+    {trend && (
+      <span class="card-trend" data-trend={trend}>
+        {trend === 'up' ? '↑' : '↓'} 12%
+      </span>
+    )}
+  </div>
+</div>
+
+<style>
+  .magnetic-card {
+    position: relative;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    overflow: hidden;
+    transition: transform 300ms ease-out, box-shadow 300ms, border-color 300ms;
+    will-change: transform;
+  }
+
+  .magnetic-card--light {
+    background: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.65);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .magnetic-card--dark {
+    background: rgba(15,23,42,0.45);
+    border: 1px solid rgba(71,85,105,0.45);
+    backdrop-filter: blur(16px);
+  }
+
+  .card-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.08), transparent 70%);
+    pointer-events: none;
+    transition: opacity 300ms;
+  }
+
+  .magnetic-card:hover .card-glow {
+    opacity: 1.5;
+  }
+
+  .card-content { position: relative; z-index: 1; }
+
+  .card-icon {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    transition: transform 300ms;
+  }
+
+  .magnetic-card:hover .card-icon { transform: scale(1.15); }
+
+  .card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgb(148,163,184);
+  }
+
+  .magnetic-card--light .card-title { color: rgb(100,116,139); }
+
+  .card-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    color: white;
+  }
+
+  .magnetic-card--light .card-value { color: rgb(15,23,42); }
+
+  .card-trend {
+    display: inline-block;
+    font-size: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .card-trend[data-trend="up"]   { color: rgb(52,211,153); }
+  .card-trend[data-trend="down"] { color: rgb(248,113,113); }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.magnetic-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = ((y - rect.height / 2) * 0.06).toFixed(2);
+      const rotateY = ((rect.width / 2 - x) * 0.06).toFixed(2);
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+      card.style.boxShadow = '0 0 32px rgba(59,130,246,0.2), 0 12px 40px rgba(0,0,0,0.3)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      card.style.boxShadow = '';
+    });
+  });
+</script>
