@@ -3,8 +3,8 @@ title: "MCP Productivity Suite"
 problem: "Entwickler-Workflows sind fragmentiert — Terminal, Browser, Notizen, Tasks in verschiedenen Tools."
 solution: "Ein MCP-Server-Bundle, das häufige Entwickleraufgaben (File-Ops, Task-Management, Web-Recherche) in einem einheitlichen Interface bündelt."
 stack: ["TypeScript", "Node.js", "MCP SDK"]
-demo: "https://github.com/TimoGoetz1988/mcp-productivity-suite"
-status: "dev"
+demo: "https://github.com/timo-goetz-ai/mcp-productivity-suite"
+status: "live"
 order: 2
 ---
 

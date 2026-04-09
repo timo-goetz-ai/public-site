@@ -4,8 +4,8 @@ problem: "Notizen entstehen überall — in Obsidian, im Terminal, in Meetings �
 solution: "MCP-Server, der Notizen strukturiert, taggt und durchsuchbar macht. Obsidian-Vault als Input, strukturierter Output für Workflows."
 stack: ["TypeScript", "MCP SDK", "Node.js", "Obsidian"]
 kpi: "Täglich verarbeitete Notizen, automatisch klassifiziert und ins Content-System eingespielt."
-demo: "https://github.com/TimoGoetz1988/smart-note-mcp"
-status: "dev"
+demo: "https://github.com/timo-goetz-ai/smart-note-mcp"
+status: "live"
 order: 1
 ---
 
