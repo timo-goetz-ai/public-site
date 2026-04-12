@@ -7,6 +7,7 @@ const verticals = [
   { label: 'Ghost Kitchens / Delivery', status: 'available', icon: '📦' },
   { label: 'Floristik / Pflanzen', status: 'available', icon: '🌿' },
   { label: 'Catering / Mensen', status: 'available', icon: '🍱' },
+  { label: 'Convenience / SB-Laden', status: 'available', icon: '🛒' },
 ];
 ---
 
@@ -25,7 +26,7 @@ const verticals = [
     </h2>
 
     <!-- Verticals grid -->
-    <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {verticals.map((v) => (
         <div
           class="flex items-start gap-4 rounded-xl px-5 py-5"

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://timo-goetz-ai.de/sitemap-index.xml
+Sitemap: https://automation-plus-ki.de/sitemap-index.xml

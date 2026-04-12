@@ -11,11 +11,30 @@ interface Props {
 
 const {
   title,
-  description = 'ML-Prognose-Systeme für Fresh-Food-Retail, Lebensmittelautomaten und Gastronomie. Weniger Verderb. Bessere Auslastung. Mehr Marge.',
-  ogImage = '/og-image.png',
+  description = 'Forecasting-Spezialist für Lebensmittelautomaten, Bäckereien und Gastronomie. ML-Prognose reduziert Verderb messbar. DEKRA-zertifiziert. DACH-Markt.',
+  ogImage = '/og-image.jpg',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Timo Goetz",
+  "jobTitle": "ML Forecasting Spezialist",
+  "description": "Forecasting-Systeme für perishable Operations im DACH-Raum. Weniger Verderb, bessere Auslastung, mehr Marge.",
+  "url": "https://automation-plus-ki.de",
+  "sameAs": ["https://github.com/TimoGoetz1988"],
+  "knowsAbout": ["Demand Forecasting", "Machine Learning", "Perishable Operations", "Food Retail", "Lebensmittelautomaten"],
+  "offers": {
+    "@type": "Offer",
+    "name": "Opportunity Scan",
+    "description": "2-tägige Analyse der Daten-Situation mit Einsparpotential-Quantifizierung",
+    "price": "2500",
+    "priceCurrency": "EUR"
+  }
+};
 ---
 
 <!doctype html>
@@ -32,14 +51,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="de_DE" />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
-    <!-- Fonts -->
+    <meta name="twitter:image" content={ogImageURL} />
+    <!-- Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,6 +75,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         rel="stylesheet"
       />
     </noscript>
+    <!-- Fonts: JetBrains Mono -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <title>{title}</title>
   </head>
   <body>

@@ -35,7 +35,7 @@ export default function Nav() {
             TG
           </span>
           <span style={{ color: 'var(--text)', letterSpacing: '0.08em' }} className="text-xs font-semibold uppercase">
-            Timo Götz
+            Timo Goetz
           </span>
         </a>
 

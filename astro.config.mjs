@@ -10,7 +10,7 @@ import node from '@astrojs/node';
 // Node standalone adapter is used for the Docker/Hetzner deployment.
 export default defineConfig({
   output: 'hybrid',
-  site: 'https://timo-goetz-ai.de',
+  site: 'https://automation-plus-ki.de',
   adapter: node({ mode: 'standalone' }),
   integrations: [
     react(),

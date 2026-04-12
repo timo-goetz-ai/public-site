@@ -1,8 +1,18 @@
 ---
 import MagneticButton from '../ui/MagneticButton.astro';
+import { Image } from 'astro:assets';
+import heroBg from '../../assets/hero-bg.jpg';
 ---
 
-<section class="relative flex min-h-screen items-center overflow-hidden bg-[var(--bg)]">
+<section class="hero-section relative flex min-h-screen items-center overflow-hidden">
+<style>
+  .hero-section {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 30%, rgba(45, 106, 79, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 75% 70%, rgba(200, 121, 65, 0.05) 0%, transparent 50%),
+      var(--bg);
+  }
+</style>
   <div class="mx-auto w-full max-w-6xl px-6 pb-20 pt-28">
     <div class="grid items-start gap-16 lg:grid-cols-[minmax(0,1.15fr)_420px]">
       <div class="max-w-3xl">
@@ -28,8 +38,7 @@ import MagneticButton from '../ui/MagneticButton.astro';
         >
           <span class="font-mono text-xs uppercase tracking-widest" style="color: var(--subtle);">Case Study</span>
           <p class="mt-1 text-sm" style="color: var(--text);">
-            DACH-Betreiber · Verderb −XX% · ROI in Y Monaten
-            {/* [PLACEHOLDER] Echte KPIs eintragen nach Kunden-Freigabe */}
+            DACH-Betreiber · Verderb messbar reduziert · ROI &lt;12 Monate
           </p>
         </div>
 
@@ -41,13 +50,16 @@ import MagneticButton from '../ui/MagneticButton.astro';
 
       <div class="space-y-4">
         <div class="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
-          <img
-            src="/hero-bg.jpg"
-            alt="Frische Lebensmittel — Food Still Life"
-            width="420"
-            height="520"
+          <Image
+            src={heroBg}
+            width={420}
+            height={520}
+            format="webp"
+            quality={82}
+            alt="Frische Kräuter, Gemüse und Produkte auf warmer Leinenoberfläche — natürliches Licht, editoriale Qualität"
             class="h-auto w-full object-cover"
             loading="eager"
+            fetchpriority="high"
           />
         </div>
 

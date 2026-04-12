@@ -50,9 +50,19 @@ const services = [
     <div class="mt-12 grid gap-6 md:grid-cols-3">
       {services.map((s) => (
         <div
-          class={`flex flex-col rounded-xl px-6 py-6 ${s.highlight ? 'ring-1' : ''}`}
-          style={`border: 1px solid var(--border); background: var(--bg-card); ${s.highlight ? 'ring-color: var(--text);' : ''}`}
+          class={`relative flex flex-col rounded-xl px-6 py-6 ${s.highlight ? 'ring-1 ring-[var(--text)]' : ''}`}
+          style={`border: 1px solid var(--border); background: var(--bg-card);`}
         >
+          {s.highlight && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span
+                class="text-xs font-semibold px-3 py-1 rounded-full tracking-wide uppercase"
+                style="background: var(--text); color: var(--bg-card);"
+              >
+                Empfohlen
+              </span>
+            </div>
+          )}
           <!-- Price badge -->
           <div class="mb-4 inline-flex items-center self-start rounded-lg px-3 py-1.5" style="background: var(--bg-2); border: 1px solid var(--border);">
             <span class="text-xs font-semibold" style="color: var(--text);">{s.price}</span>
